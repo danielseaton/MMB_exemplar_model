@@ -13,25 +13,15 @@ deltaP = 0.01;
 sens = zeros(nP,1);
 
 
-% for i = 1:nP
-% 
-%     P = P0;
-%     P(i) = P(i)*(1+deltaP);
-%     
-%     [T,Y] = simulate_experiment(P);
-%     
-%     peak_PUL1 = max(Y(:,1));
-%     sens(i) = (peak_PUL1-peak_PUL1_basal)/deltaP;
-% end
-% 
-% save('sensitivity_analysis_results','sens','deltaP','peak_PUL1_basal')
+for i = 1:nP
 
-load('sensitivity_analysis_results')
-
-LW = 2;
-FS = 16;
-
-plot([0,20],[0,0],'-k')
-plot(1:length(sens),sens,'ok','MarkerFaceColor','c')
-xlim([0,20])
-ylim([-1.2,1.2])
+    P = P0;
+    P(i) = P(i)*(1+deltaP);
+    
+    [T,Y] = simulate_experiment(P);
+    
+    peak_PUL1 = max(Y(:,1));
+    sens(i) = (peak_PUL1-peak_PUL1_basal)/deltaP;
+end
+ 
+save('sensitivity_analysis_results','sens','deltaP','peak_PUL1_basal')
